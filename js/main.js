@@ -2,6 +2,7 @@ console.log('Main!');
 
 let gLat;
 let glng;
+let gTitle;
 import locService from './services/loc.service.js'
 import mapService from './services/map.service.js'
 import whetherService from './services/weather.service.js'
@@ -19,7 +20,7 @@ window.onload = () => {
     mapService.initMap()
         .then(() => {
             mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-            onRenderWhether(32.0749831,34.9120554)
+            onRenderWhether(32.0749831, 34.9120554)
         })
         .catch(console.log('INIT MAP ERROR'));
 
@@ -52,14 +53,12 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
     let elSearchLoc = document.querySelector('.location-input').value;
     let elLocation = document.querySelector('.location-title');
 
-
-
     geoCode.getCoords(elSearchLoc)
         .then(coords => {
 
-            lat = coords.lat;
-            lng = coords.lng;
-            elLocation.innerText += geoCode.gTitle;
+            lat = coords.geometry.location.lat;
+            lng = coords.geometry.location.lng;
+            gTitle = coords.formatted_address
 
 
         })
@@ -67,17 +66,20 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
 
             mapService.addMarker({ lat: lat, lng: lng });
             mapService.panTo(lat, lng);
-            onRenderWhether(lat,lng);
-
+            elLocation.innerText = gTitle;
+            onRenderWhether(lat, lng);
 
         })
+
+})
+
+//Copy location button
+document.querySelector('.copy-location-btn').addEventListener('click', (ev) => {
 
 
 })
 
-
-
-function onRenderWhether(lat,lng) {
+function onRenderWhether(lat, lng) {
     let convert = 271.13;
     let prmWeather = whetherService.getWeather(lat, lng)
     prmWeather.then(res => {
