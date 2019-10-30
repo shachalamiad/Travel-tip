@@ -84,9 +84,10 @@ function onRenderWhether(lat,lng) {
         console.log(res)
         let temperature = (res.main.temp - convert).toFixed(2)
         let wind = res.wind.speed
-        console.log(wind)
-        console.log(wind)
-        document.querySelector('.weather').innerHTML = temperature;
+        let weatherDescription = res.weather[0].description
+        console.log(weatherDescription)
+        document.querySelector('.temperature').innerHTML = temperature;
+        document.querySelector('.weather-description').innerHTML = weatherDescription;
         document.querySelector('.wind').innerHTML = `${wind} m/s`;
     })
 
