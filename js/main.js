@@ -8,7 +8,6 @@ import whetherService from './services/weather.service.js'
 import geoCode from './services/geo-service.js'
 
 
-onRenderWhether();
 
 locService.getLocs()
     .then(locs => console.log('locs', locs))
@@ -20,6 +19,7 @@ window.onload = () => {
     mapService.initMap()
         .then(() => {
             mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+            onRenderWhether(32.0749831,34.9120554)
         })
         .catch(console.log('INIT MAP ERROR'));
 
@@ -56,7 +56,7 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
 
     geoCode.getCoords(elSearchLoc)
         .then(coords => {
-          
+
             lat = coords.lat;
             lng = coords.lng;
             elLocation.innerText += geoCode.gTitle;
@@ -67,15 +67,19 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
 
             mapService.addMarker({ lat: lat, lng: lng });
             mapService.panTo(lat, lng);
-          
+            onRenderWhether(lat,lng);
+
+
         })
 
 
 })
 
-function onRenderWhether() {
+
+
+function onRenderWhether(lat,lng) {
     let convert = 271.13;
-    let prmWeather = whetherService.getWeather(32.0749831, 34.9120554)
+    let prmWeather = whetherService.getWeather(lat, lng)
     prmWeather.then(res => {
         console.log(res)
         let temperature = (res.main.temp - convert).toFixed(2)
@@ -83,7 +87,7 @@ function onRenderWhether() {
         console.log(wind)
         console.log(wind)
         document.querySelector('.weather').innerHTML = temperature;
-        document.querySelector('.wind').innerHTML = `${wind} m/s` ;
+        document.querySelector('.wind').innerHTML = `${wind} m/s`;
     })
 
 }
