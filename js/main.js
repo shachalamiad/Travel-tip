@@ -6,39 +6,53 @@ import locService from './services/loc.service.js'
 import mapService from './services/map.service.js'
 import whetherService from './services/weather.service.js'
 
+onRenderWhether();
+
 locService.getLocs()
     .then(locs => console.log('locs', locs))
 
-    window.onload = () => {
-        onInitWhether();
-        mapService.initMap()
-            .then(() => {
-                mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-            })
-            .catch(console.log('INIT MAP ERROR'));
-    
-    
-        locService.getPosition()
-            .then(pos => {
-                gLat=pos.coords.latitude;
-                glng=pos.coords.longitude;
-             
-                console.log('User position is:', pos.coords);
-            })
-            .catch(err => {
-                console.log('err!!!', err);
-            })
-    }
+window.onload = () => {
+
+    mapService.initMap()
+        .then(() => {
+            mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+        })
+        .catch(console.log('INIT MAP ERROR'));
+
+
+    locService.getPosition()
+        .then(pos => {
+            gLat = pos.coords.latitude;
+            glng = pos.coords.longitude;
+
+            console.log('User position is:', pos.coords);
+        })
+        .catch(err => {
+            console.log('err!!!', err);
+        })
+}
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
-    
+
     mapService.panTo(gLat, glng);
 
-    mapService.addMarker({ lat:gLat, lng: glng });
+    mapService.addMarker({ lat: gLat, lng: glng });
 })
 
 
-function onInitWhether() {
-    whetherService.getWeather(32.0749831, 34.9120554)
-        .then(res => console.log(res))
+function onRenderWhether() {
+    let convert = 271.13;
+    let prmWeather = whetherService.getWeather(32.0749831, 34.9120554)
+    prmWeather.then(res => {
+        console.log(res)
+        let temperature = (res.main.temp - convert).toFixed(2)
+        let wind = res.wind.speed
+        console.log(wind)
+        console.log(wind)
+        document.querySelector('.weather').innerHTML = temperature;
+        document.querySelector('.wind').innerHTML = `${wind} m/s` ;
+    })
+
 }
+
+// .then(res => (+res.data.main.temp - convert))
