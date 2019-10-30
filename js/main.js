@@ -2,7 +2,7 @@ console.log('Main!');
 
 import locService from './services/loc.service.js'
 import mapService from './services/map.service.js'
-
+import whetherService from './services/weather.service.js'
 
 locService.getLocs()
     .then(locs => console.log('locs', locs))
@@ -30,3 +30,10 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     mapService.panTo(35.6895, 139.6917);
 })
+
+
+
+window.onload = () => {
+    whetherService.getWeather(32.0749831, 34.9120554)
+        .then(res => console.log(res))
+}
