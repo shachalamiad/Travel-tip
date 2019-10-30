@@ -1,0 +1,42 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightsalmon;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4em;
+}
+
+.logo {
+    font-family: fantasy;
+    font-size: xx-large;
+}
+
+.location-reader {
+    font-family: fantasy;
+    font-size: large;
+}
+
+.second-line-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em; 
+}
+
+.weather {
+    background-color: white;
+    width: 200px;
+    height: 150px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+}

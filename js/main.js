@@ -8,6 +8,8 @@ import whetherService from './services/weather.service.js'
 import geoCode from './services/geo-service.js'
 
 
+onRenderWhether();
+
 locService.getLocs()
     .then(locs => console.log('locs', locs))
 
@@ -70,4 +72,19 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
 
 
 })
+
+function onRenderWhether() {
+    let convert = 271.13;
+    let prmWeather = whetherService.getWeather(32.0749831, 34.9120554)
+    prmWeather.then(res => {
+        console.log(res)
+        let temperature = (res.main.temp - convert).toFixed(2)
+        let wind = res.wind.speed
+        console.log(wind)
+        console.log(wind)
+        document.querySelector('.weather').innerHTML = temperature;
+        document.querySelector('.wind').innerHTML = `${wind} m/s` ;
+    })
+
+}
 
