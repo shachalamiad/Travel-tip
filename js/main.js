@@ -9,9 +9,8 @@ import whetherService from './services/weather.service.js'
 locService.getLocs()
     .then(locs => console.log('locs', locs))
 
-
-
     window.onload = () => {
+        onInitWhether();
         mapService.initMap()
             .then(() => {
                 mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
@@ -39,8 +38,8 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
 })
 
 
-
-window.onload = () => {
+function onInitWhether() {
+    console.log('hi')
     whetherService.getWeather(32.0749831, 34.9120554)
         .then(res => console.log(res))
 }
