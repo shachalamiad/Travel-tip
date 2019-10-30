@@ -39,7 +39,6 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
 
 
 function onInitWhether() {
-    console.log('hi')
     whetherService.getWeather(32.0749831, 34.9120554)
         .then(res => console.log(res))
 }

@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightsalmon;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4em;
+}
+
+.logo {
+    font-family: fantasy;
+    font-size: xx-large;
+}
+
+.location-reader {
+    font-family: fantasy;
+    font-size: large;
+    margin-bottom: 1.5em;
+}

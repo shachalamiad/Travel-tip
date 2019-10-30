@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel-Tip2</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <h1>Travel-Tip</h1>
-    <h2>Location:</h2>
+    <section class="header-container">
+        <div class="logo">Travel-Tip</div>
+        <div>
+        <input type="text" placeholder="Enter Location"> 
+        <button class="go-btn">Go</button>
+        <button class="mylocation-btn">My Location</button>
+    </div>
+    </section>
+    <section>
+        <div class="location-reader">Location:</div>
+    </section>
+    
     <div id="map" style="width: 100%; height: 400px;"></div>
-    <button class="mylocation-btn">my location</button>
-    <input type="text" placeholder="Enter Location"> 
-    <button class="go-btn">Go</button>
     
     <script src="js/lib/axios.js"></script>
     <script type="module" src="js/main.js"></script>
