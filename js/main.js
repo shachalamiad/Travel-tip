@@ -9,39 +9,47 @@ import whetherService from './services/weather.service.js'
 import geoCode from './services/geo-service.js'
 
 
+// locService.getLocs()
+//     .then(locs => console.log('locs', locs))
 
-locService.getLocs()
-    .then(locs => console.log('locs', locs))
-
-
+let elLocation = document.querySelector('.location-title');
 
 window.onload = () => {
 
+  
+
     mapService.initMap()
         .then(() => {
-            mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-            onRenderWhether(32.0749831, 34.9120554)
+            mapService.addMarker({ lat: 32.0852999, lng: 34.7817675 });
+            onRenderWhether(32.0852999, 34.7817675)
         })
+
         .catch(console.log('INIT MAP ERROR'));
 
-
-    locService.getPosition()
+        locService.getPosition()
         .then(pos => {
             gLat = pos.coords.latitude;
             glng = pos.coords.longitude;
-
+          
             console.log('User position is:', pos.coords);
         })
+
+
         .catch(err => {
             console.log('err!!!', err);
         })
+
 }
 //My location button
 document.querySelector('.mylocation-btn').addEventListener('click', (ev) => {
 
-    mapService.panTo(gLat, glng);
 
-    mapService.addMarker({ lat: gLat, lng: glng });
+    geoCode.getAddress(gLat, glng)
+        .then(address => {
+            mapService.panTo(gLat, glng);
+            mapService.addMarker({ lat: gLat, lng: glng });
+            elLocation.innerText = 'Location: ' + address;
+        })
 })
 
 
@@ -51,14 +59,18 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
     let lat;
     let lng;
     let elSearchLoc = document.querySelector('.location-input').value;
-    let elLocation = document.querySelector('.location-title');
+
 
     geoCode.getCoords(elSearchLoc)
         .then(coords => {
 
             lat = coords.geometry.location.lat;
             lng = coords.geometry.location.lng;
-            gTitle = coords.formatted_address
+
+            console.log(lat)
+            console.log(lng)
+
+            gTitle = 'Location: ' + coords.formatted_address
 
 
         })
@@ -88,9 +100,9 @@ function onRenderWhether(lat, lng) {
         let wind = res.wind.speed
         let weatherDescription = res.weather[0].description
         console.log(weatherDescription)
-        document.querySelector('.temperature').innerHTML = temperature;
-        document.querySelector('.weather-description').innerHTML = weatherDescription;
-        document.querySelector('.wind').innerHTML = `${wind} m/s`;
+        document.querySelector('.temperature').innerHTML ='Temperature: '+ temperature;
+        document.querySelector('.weather-description').innerHTML ='Weather today: '+ weatherDescription;
+        document.querySelector('.wind').innerHTML = 'Wind: '+`${wind} m/s`;
     })
 
 }

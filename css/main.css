@@ -1,21 +1,35 @@
 *{
     box-sizing: border-box;
+    font-family: monospace;
 }
 
 body {
     background-color: lightsalmon;
 }
 
-.header-container {
+.temperature-container {
+    background-color: white;
+    width: 397px;
+    margin-left: 52px;
+    height: 215px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 4em;
 }
 
-.logo {
+
+
+ .logo {
     font-family: fantasy;
     font-size: xx-large;
+    padding: 10px;
+} 
+
+.location-title{
+    padding: 10px;
+    display: block;
 }
 
 .location-reader {
@@ -23,11 +37,9 @@ body {
     font-size: large;
 }
 
-.second-line-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1em; 
+.second-container {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
 }
 
 .weather {
@@ -39,4 +51,31 @@ body {
 .grid-container {
     display: grid;
     grid-template-rows: repeat(2, 1fr);
+} 
+
+
+
+button{
+    width: 100%;
+    height: 40px;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    width: 100%;
+
+}
+li{
+    margin-left:20px;
+    width: 100%;
+}
+.location-input{
+    width: 300px;
+    height: 40px;
+   
+
+}
+#map{
+    height: 400px;
 }
