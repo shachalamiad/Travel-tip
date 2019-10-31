@@ -20,8 +20,8 @@ window.onload = () => {
     let userLng;
     if (getParamFromUrl()!== null) {
         console.log('param lat is:',)
-        userLat = getParamFromUrl().lat;
-        userLng = getParamFromUrl().lng;
+        userLat = +getParamFromUrl().lat;
+        userLng = +getParamFromUrl().lng;
         console.log('param lat is:',userLat)
         console.log('param lng is:',userLng)
 
@@ -36,7 +36,7 @@ window.onload = () => {
     console.log('userLat', +userLat);
     console.log('userLng', +userLng);
 
-    mapService.initMap(+userLat,+userLng)
+    mapService.initMap(userLat,userLng)
         .then(() => {
             // mapService.panTo(userLat, userLng);
             mapService.addMarker({ lat: userLat, lng: userLng});
