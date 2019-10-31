@@ -27,12 +27,12 @@ window.onload = () => {
         userLng = 34.7817675;
     }
 
-console.log('userLat',userLat);
-console.log('userLng',userLng);
+    console.log('userLat', userLat);
+    console.log('userLng', userLng);
 
-    mapService.initMap(userLat, userLng)
+    mapService.initMap(lat = userLat, userLng)
         .then(() => {
-            mapService.addMarker({ lat: userLat, lng: userLng });
+            mapService.addMarker({ lat: userLat, lng: userLng});
             onRenderWhether(userLat, userLng)
         })
 
@@ -127,7 +127,7 @@ function getParamFromUrl() {
     let lat = url.searchParams.get("lat");
     let lng = url.searchParams.get("lng");
 
-    console.log('url Lat:', lat, 'Lng', lng);
+
     if (lat !== null && lng !== null) {
         return {
             lat,
