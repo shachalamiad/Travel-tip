@@ -85,6 +85,8 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
 
             lat = coords.geometry.location.lat;
             lng = coords.geometry.location.lng;
+            gLat=lat;
+            glng=lng;
 
             console.log(lat)
             console.log(lng)
@@ -107,6 +109,7 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
 //Copy location button
 document.querySelector('.copy-location-btn').addEventListener('click', (ev) => {
     copyToClipboard();
+    console.log()
     getParamFromUrl();
 
 })
