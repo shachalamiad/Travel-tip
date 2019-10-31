@@ -19,8 +19,13 @@ window.onload = () => {
     let userLat;
     let userLng;
     if (getParamFromUrl()!== null) {
+        console.log('param lat is:',)
         userLat = getParamFromUrl().lat;
         userLng = getParamFromUrl().lng;
+        console.log('param lat is:',userLat)
+        console.log('param lng is:',userLng)
+
+
 
     }
     else {
