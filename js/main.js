@@ -131,8 +131,8 @@ function getParamFromUrl() {
     let currentUrl = window.location.href;
     let url_string = currentUrl;
     let url = new URL(url_string);
-    let lat = url.searchParams.get("lat");
-    let lng = url.searchParams.get("lng");
+    let lat = +url.searchParams.get("lat");
+    let lng = +url.searchParams.get("lng");
 
 
     if (lat !== null && lng !== null) {
