@@ -33,8 +33,8 @@ window.onload = () => {
         userLng = 34.7817675;
     }
 
-    console.log('userLat', userLat);
-    console.log('userLng', userLng);
+    console.log('userLat', +userLat);
+    console.log('userLng', +userLng);
 
     mapService.initMap(userLat,userLng)
         .then(() => {
