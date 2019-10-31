@@ -15,22 +15,32 @@ import geoCode from './services/geo-service.js'
 let elLocation = document.querySelector('.location-title');
 
 window.onload = () => {
+    let userLat;
+    let userLng;
+    if (getParamFromUrl() !== null) {
+        userLat = getParamFromUrl().lat;
+        userLng = getParamFromUrl().lng;
 
-  
+    }
+    else {
+        userLat = 32.0852999;
+        userLng = 34.7817675;
+    }
 
-    mapService.initMap()
+
+    mapService.initMap(userLat, userLng)
         .then(() => {
-            mapService.addMarker({ lat: 32.0852999, lng: 34.7817675 });
-            onRenderWhether(32.0852999, 34.7817675)
+            mapService.addMarker({ lat: userLat, lng: userLng });
+            onRenderWhether(userLat, userLng)
         })
 
         .catch(console.log('INIT MAP ERROR'));
 
-        locService.getPosition()
+    locService.getPosition()
         .then(pos => {
             gLat = pos.coords.latitude;
             glng = pos.coords.longitude;
-          
+
             console.log('User position is:', pos.coords);
         })
 
@@ -87,7 +97,8 @@ document.querySelector('.go-btn').addEventListener('click', (ev) => {
 
 //Copy location button
 document.querySelector('.copy-location-btn').addEventListener('click', (ev) => {
-
+    copyToClipboard();
+    getParamFromUrl();
 
 })
 
@@ -100,10 +111,43 @@ function onRenderWhether(lat, lng) {
         let wind = res.wind.speed
         let weatherDescription = res.weather[0].description
         console.log(weatherDescription)
-        document.querySelector('.temperature').innerHTML ='Temperature: '+ temperature;
-        document.querySelector('.weather-description').innerHTML ='Weather today: '+ weatherDescription;
-        document.querySelector('.wind').innerHTML = 'Wind: '+`${wind} m/s`;
+        document.querySelector('.temperature').innerHTML = 'Temperature: ' + temperature;
+        document.querySelector('.weather-description').innerHTML = 'Weather today: ' + weatherDescription;
+        document.querySelector('.wind').innerHTML = 'Wind: ' + `${wind} m/s`;
     })
 
 }
 
+function getParamFromUrl() {
+    let currentUrl = window.location.href;
+    let url_string = currentUrl;
+    let url = new URL(url_string);
+    let lat = url.searchParams.get("lat");
+    let lng = url.searchParams.get("lng");
+
+    console.log('url Lat:', lat, 'Lng', lng);
+    if (lat !== null && lng !== null) {
+        return {
+            lat,
+            lng
+        }
+    }
+    else {
+        return null;
+    }
+
+
+}
+
+
+function copyToClipboard() {
+
+    var copyUrl = `https://shachalamiad.github.io/Travel-tip/lat=${gLat}&lng=${glng}`;
+    var dummy = document.createElement('input'),
+        text = copyUrl;
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
+}
