@@ -5,7 +5,7 @@ let glng;
 let gTitle;
 import locService from './services/loc.service.js'
 import mapService from './services/map.service.js'
-import whetherService from './services/weather.service.js'
+import weatherService from './services/weather.service.js'
 import geoCode from './services/geo-service.js'
 
 
@@ -93,7 +93,7 @@ document.querySelector('.copy-location-btn').addEventListener('click', (ev) => {
 
 function onRenderWhether(lat, lng) {
     let convert = 271.13;
-    let prmWeather = whetherService.getWeather(lat, lng)
+    let prmWeather = weatherService.getWeather(lat, lng)
     prmWeather.then(res => {
         console.log(res)
         let temperature = (res.main.temp - convert).toFixed(2)
