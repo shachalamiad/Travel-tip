@@ -32,6 +32,7 @@ window.onload = () => {
 
     mapService.initMap()
         .then(() => {
+            mapService.panTo(userLat, userLng);
             mapService.addMarker({ lat: userLat, lng: userLng});
             onRenderWhether(userLat, userLng)
         })
