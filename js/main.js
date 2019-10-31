@@ -15,9 +15,10 @@ import geoCode from './services/geo-service.js'
 let elLocation = document.querySelector('.location-title');
 
 window.onload = () => {
+    getParamFromUrl();
     let userLat;
     let userLng;
-    if (getParamFromUrl() !== null) {
+    if (getParamFromUrl()!== null) {
         userLat = getParamFromUrl().lat;
         userLng = getParamFromUrl().lng;
 
@@ -30,9 +31,9 @@ window.onload = () => {
     console.log('userLat', userLat);
     console.log('userLng', userLng);
 
-    mapService.initMap()
+    mapService.initMap(userLat,userLng)
         .then(() => {
-            mapService.panTo(userLat, userLng);
+            // mapService.panTo(userLat, userLng);
             mapService.addMarker({ lat: userLat, lng: userLng});
             onRenderWhether(userLat, userLng)
         })
