@@ -36,7 +36,7 @@ window.onload = () => {
     console.log('userLat', +userLat);
     console.log('userLng', +userLng);
 
-    mapService.initMap(userLat,userLng)
+    mapService.initMap(+userLat,+userLng)
         .then(() => {
             // mapService.panTo(userLat, userLng);
             mapService.addMarker({ lat: userLat, lng: userLng});
