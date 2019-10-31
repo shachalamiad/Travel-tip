@@ -30,7 +30,7 @@ window.onload = () => {
     console.log('userLat', userLat);
     console.log('userLng', userLng);
 
-    mapService.initMap(lat = userLat, userLng)
+    mapService.initMap()
         .then(() => {
             mapService.addMarker({ lat: userLat, lng: userLng});
             onRenderWhether(userLat, userLng)
