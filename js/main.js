@@ -142,7 +142,7 @@ function getParamFromUrl() {
 
 function copyToClipboard() {
 
-    var copyUrl = `https://shachalamiad.github.io/Travel-tip/lat=${gLat}&lng=${glng}`;
+    var copyUrl = `https://shachalamiad.github.io/Travel-tip/index.html?lat=${gLat}&lng=${glng}`;
     var dummy = document.createElement('input'),
         text = copyUrl;
     document.body.appendChild(dummy);
